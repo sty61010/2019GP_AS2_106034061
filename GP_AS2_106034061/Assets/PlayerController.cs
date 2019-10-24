@@ -17,7 +17,11 @@ public class PlayerController : MonoBehaviour
 
     public AudioSource audioSourse;
     public AudioClip pickUp;
-    
+    public AudioClip getCoin;
+
+    public AudioClip Attacking;
+    public AudioClip playerAttacked;
+    public AudioClip enemyAttecked;
     public GameObject healthBar;
     public TextMeshProUGUI scoreText;
     private int score = 0;

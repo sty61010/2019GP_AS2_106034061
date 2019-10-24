@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class GameController : MonoBehaviour
 {
     public AudioSource audioSource;
-
+    
     public AudioClip[] bgList;
 
     public void OnToggleChange(bool t){

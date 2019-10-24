@@ -6,7 +6,11 @@ using UnityEngine.SceneManagement;
 public class MenuButton : MonoBehaviour
 {
     public void OnButtonClick(){
-        Debug.Log("click");
-        SceneManager.LoadScene("Game", LoadSceneMode.Single);
+        Debug.Log("Start");
+        SceneManager.LoadScene("Game_1", LoadSceneMode.Single);
+    }
+    public void QuitClick(){
+        Debug.Log("Quit");
+        SceneManager.LoadScene("End", LoadSceneMode.Single);
     }
 }

@@ -6,6 +6,12 @@ TagManager:
   tags:
   - Box
   - Out
+  - Coin
+  - Enemy1
+  - Enemy2
+  - Boss
+  - Medicine
+  - NextLevel
   layers:
   - Default
   - TransparentFX
