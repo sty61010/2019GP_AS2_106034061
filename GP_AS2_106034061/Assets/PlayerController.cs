@@ -86,5 +86,16 @@ public class PlayerController : MonoBehaviour
             scoreText.text = "Score : " + score.ToString();
 			Destroy(other.gameObject);
         }
+
+        if(other.gameObject.tag == "trap1"){
+			Destroy(other.gameObject);
+
+        }
+		if(other.gameObject.tag == "Coin"){
+            audioSourse.PlayOneShot(getCoin);
+            score+=10;
+            scoreText.text = "Score : " + score.ToString();
+			Destroy(other.gameObject);
+        }
     }
 }

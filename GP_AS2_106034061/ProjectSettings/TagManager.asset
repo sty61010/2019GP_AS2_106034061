@@ -12,6 +12,7 @@ TagManager:
   - Boss
   - Medicine
   - NextLevel
+  - trap1
   layers:
   - Default
   - TransparentFX
