@@ -53,6 +53,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\BulletController.cs" />
+     <Compile Include="Assets\Enemy1Controller.cs" />
+     <Compile Include="Assets\Enemy2Controller.cs" />
      <Compile Include="Assets\ExitCanvasController.cs" />
      <Compile Include="Assets\GameController.cs" />
      <Compile Include="Assets\Import\AurynSky\Forest Pack\Scripts\ChestDemo.cs" />
@@ -62,6 +65,7 @@
      <Compile Include="Assets\Import\DungeonVoxels\Scripts\LightFlicker.cs" />
      <Compile Include="Assets\Import\DungeonVoxels\Scripts\SpikeTrap.cs" />
      <Compile Include="Assets\Import\DungeonVoxels\Scripts\TargetFollow.cs" />
+     <Compile Include="Assets\Import\DungeonVoxels\Scripts\TargetFollow2.cs" />
      <Compile Include="Assets\Import\JMO Assets\WarFX\Demo\Assets\CFX_AutoStopLoopedEffect.cs" />
      <Compile Include="Assets\Import\JMO Assets\WarFX\Demo\Assets\CFX_Demo_RandomDir.cs" />
      <Compile Include="Assets\Import\JMO Assets\WarFX\Demo\Assets\CFX_Demo_RotateCamera.cs" />
