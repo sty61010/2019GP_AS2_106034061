@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     public GameObject bullet; //子彈
     GameObject star, gun; //準星 與 槍管
     GameObject BulletPrefab; //用來接生成的物件
+    ParticleSystem gunParticles;
 
     // Use this for initialization
     void Start () {
@@ -41,6 +42,8 @@ public class PlayerController : MonoBehaviour
 		canJump = true;
         gun = GameObject.Find("Player/Gun");
         star = GameObject.Find("Player/Star");
+        // gunParticles = ParticleSystem.Find("Player/GunParticles");
+        gunParticles = GameObject.Find("Player/GunParticles").GetComponent<ParticleSystem>();
 
     }
 	
@@ -49,12 +52,12 @@ public class PlayerController : MonoBehaviour
         float moveVertical = Input.GetAxis ("Vertical");
 		float moveHorizontal = Input.GetAxis ("Horizontal");
         float speed = 3.0f;
-        if(health == 0){
+        if(health == 0.0f){
             SceneManager.LoadScene("End", LoadSceneMode.Single);
 
         }
         if(canJump && Input.GetKeyDown(KeyCode.Space)){
-            m_rigid.AddForce(new Vector3(0, 200, 0));
+            m_rigid.AddForce(new Vector3(0, 300, 0));
 			canJump = false;
 		}
 
@@ -63,24 +66,18 @@ public class PlayerController : MonoBehaviour
 		}
 		m_rigid.velocity =  speed * (Vector3.forward * moveVertical + Vector3.right * moveHorizontal) + new Vector3(0, m_rigid.velocity.y, 0);
 		m_rigid.angularVelocity = Vector3.zero;
-
-		
         if (Input.GetKeyDown(KeyCode.R)){
             this.gameObject.transform.position = initPos;
 
         }
-
-
-        // 計算發射的方向
         direction = star.transform.position - gun.transform.position;
-        //按下左鍵 
         if (Input.GetKeyDown(KeyCode.K) || Input.GetMouseButtonDown(0))
         {
             audioSourse.PlayOneShot(Attacking);
-            //生成子彈
             BulletPrefab = Instantiate(bullet, gun.transform.position, Quaternion.identity);
-            //發射子彈
             BulletPrefab.GetComponent<Rigidbody>().velocity = direction * 70;
+            gunParticles.Stop ();
+            gunParticles.Play();
         }
 
     }
@@ -92,15 +89,23 @@ public class PlayerController : MonoBehaviour
     void UpdateHealthBar(){
         //update position
         healthBar.transform.position = transform.position + Vector3.up * 0.8f;
-
         //update health amount
         healthBar.transform.GetChild(1).GetComponent<Image>().fillAmount = health;
     }
-
+    void OnParticleCollision(GameObject other) {  
+        if(other.gameObject.tag == "EnemyFire"){
+            audioSourse.PlayOneShot(playerAttacked);
+            // this.gameObject.transform.position = initPos;
+            health -= 0.1f;
+        }
+    }    
 	void OnCollisionEnter(Collision collision){
 		canJump = true;
 	}
-
+    public void QuitClick(){
+        Debug.Log("Quit");
+        SceneManager.LoadScene("End", LoadSceneMode.Single);
+    }
     void OnTriggerEnter(Collider other){
 		if(other.gameObject.tag == "Out"){
             audioSourse.PlayOneShot(playerAttacked);
@@ -116,6 +121,12 @@ public class PlayerController : MonoBehaviour
             audioSourse.PlayOneShot(playerAttacked);
             // this.gameObject.transform.position = initPos;
             health -= 0.05f;
+        }
+        if(other.gameObject.tag == "Medicine"){
+            audioSourse.PlayOneShot(pickUp);
+            health += 0.1f;
+            Destroy(other.gameObject);
+
         }
 		if(other.gameObject.tag == "Box"){
             audioSourse.PlayOneShot(pickUp);

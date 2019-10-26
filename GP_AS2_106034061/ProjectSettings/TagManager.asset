@@ -14,6 +14,8 @@ TagManager:
   - NextLevel
   - trap1
   - Bullet
+  - FxTemporaire
+  - EnemyFire
   layers:
   - Default
   - TransparentFX

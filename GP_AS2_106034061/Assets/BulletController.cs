@@ -7,6 +7,8 @@ public class BulletController : MonoBehaviour
     // Start is called before the first frame update
     // public AudioSource audioSourse;
     // public AudioClip Boom;
+    public Object ExplosionEffect;
+
     void Start()
     {
         Destroy(gameObject, 5);
@@ -20,7 +22,6 @@ public class BulletController : MonoBehaviour
     
     void OnCollisionEnter(Collision collsionObject)
     {
-        // audioSourse.PlayOneShot(Boom);
         Destroy(gameObject);
     }
 }

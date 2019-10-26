@@ -26,9 +26,16 @@ public class Enemy1Controller : MonoBehaviour
 
     public AudioSource audioSourse;
     public AudioClip EnemyAttacked;
+	// public GameObject EnemyParticles;
+	// ParticleSystem EnemyParticlesEF;
+    public Object ExplosionEffect;
+
     void Start()
     {
-        
+        // EnemyParticles = GameObject.Find("EnemyParticles");
+        // EnemyParticlesEF = GameObject.Find("EnemyParticles").GetComponent<ParticleSystem>();
+		// EnemyParticlesEF = EnemyParticles.GetComponent<ParticleSystem>();
+
     }
 
     // Update is called once per frame
@@ -62,7 +69,7 @@ public class Enemy1Controller : MonoBehaviour
 	            // this.GetComponent<Animation>().Play("idle");
 	            NowState=STATE_STAND;
 	            break;
-	            
+	    
 	            case 1:
 	            //行走状态
 	            //使怪物旋转以完成行走动作
@@ -88,6 +95,18 @@ public class Enemy1Controller : MonoBehaviour
     void OnTriggerEnter(Collider other){
 		if(other.gameObject.tag == "Bullet"){
             audioSourse.PlayOneShot(EnemyAttacked);
+			// EnemyParticles.transform.position = this.gameObject.transform.position;
+			// EnemyParticlesEF.Stop();
+			// EnemyParticlesEF.Play();
+			if (ExplosionEffect != null)
+            {
+                GameObject exp = GameObject.Instantiate(ExplosionEffect, Vector3.zero, Quaternion.identity) as GameObject;
+                exp.transform.position = this.gameObject.transform.position;
+                // Destroy after 4 sec
+                GameObject.Destroy(exp, 4);
+                // Destroy Self
+                // GameObject.Destroy(gameObject);                   
+            }   
             Destroy(gameObject);
         }
     }
